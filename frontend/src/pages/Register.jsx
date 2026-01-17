@@ -1,10 +1,14 @@
 // src/pages/Register.jsx
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom'; // ← Link added
 import api from '../services/api';
 
 export default function Register() {
-  const [formData, setFormData] = useState({ name: '', email: '', password: '' });
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -106,9 +110,9 @@ export default function Register() {
 
         <p className="mt-8 text-center text-sm text-gray-400">
           Already have an account?{' '}
-          <a href="/login" className="text-[#1f6feb] hover:underline font-medium">
+          <Link to="/login" className="text-[#1f6feb] hover:underline font-medium">
             Sign in
-          </a>
+          </Link>
         </p>
       </div>
     </div>

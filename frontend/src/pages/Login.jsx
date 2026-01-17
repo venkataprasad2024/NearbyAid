@@ -1,6 +1,6 @@
 // src/pages/Login.jsx
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom'; // ← Link added here
 import api from '../services/api';
 
 export default function Login() {
@@ -22,9 +22,9 @@ export default function Login() {
       const res = await api.post('/auth/login', formData);
       localStorage.setItem('token', res.data.token);
       setMessage('Login successful! Redirecting...');
-      setTimeout(() => navigate('/'), 1500);
+      setTimeout(() => navigate('/map'), 1500);
     } catch (err) {
-      setMessage(err.response?.data?.message || 'Login failed');
+      setMessage(err.response?.data?.message || 'Login failed. Try again.');
     } finally {
       setLoading(false);
     }
@@ -40,46 +40,37 @@ export default function Login() {
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-              Email address
-            </label>
+            <label className="block text-sm font-medium text-gray-300 mb-2">Email address</label>
             <input
-              id="email"
               name="email"
               type="email"
-              autoComplete="email"
-              required
               value={formData.email}
               onChange={handleChange}
-              className="w-full px-4 py-3 bg-[#0d1117] border border-[#30363d] rounded-md text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+              className="w-full px-4 py-3 bg-[#0d1117] border border-[#30363d] rounded-md text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="you@example.com"
+              required
             />
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-2">
-              Password
-            </label>
+            <label className="block text-sm font-medium text-gray-300 mb-2">Password</label>
             <input
-              id="password"
               name="password"
               type="password"
-              autoComplete="current-password"
-              required
               value={formData.password}
               onChange={handleChange}
-              className="w-full px-4 py-3 bg-[#0d1117] border border-[#30363d] rounded-md text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+              className="w-full px-4 py-3 bg-[#0d1117] border border-[#30363d] rounded-md text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="••••••••"
+              required
             />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className={`w-full py-3 px-4 rounded-md text-white font-medium transition duration-200 
-              ${loading 
-                ? 'bg-blue-700/50 cursor-not-allowed' 
-                : 'bg-[#1f6feb] hover:bg-[#388bfd]'}`}
+            className={`w-full py-3 px-4 rounded-md text-white font-medium transition ${
+              loading ? 'bg-blue-700/50 cursor-not-allowed' : 'bg-[#1f6feb] hover:bg-[#388bfd]'
+            }`}
           >
             {loading ? 'Signing in...' : 'Sign in'}
           </button>
@@ -92,10 +83,10 @@ export default function Login() {
         )}
 
         <p className="mt-8 text-center text-sm text-gray-400">
-          New to NearByAid?{' '}
-          <a href="/register" className="text-[#1f6feb] hover:underline font-medium">
+          New here?{' '}
+          <Link to="/register" className="text-[#1f6feb] hover:underline font-medium">
             Create an account
-          </a>
+          </Link>
         </p>
       </div>
     </div>
