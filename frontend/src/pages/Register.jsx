@@ -37,7 +37,7 @@ export default function Register() {
     <div className="min-h-screen bg-[#0d1117] flex items-center justify-center p-4">
       <div className="w-full max-w-md bg-[#161b22] rounded-lg shadow-xl border border-[#30363d] p-8">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-semibold text-white">Creat e your account</h1>
+          <h1 className="text-3xl font-semibold text-white">Create your account</h1>
           <p className="text-gray-400 mt-2">Join NearByAid today</p>
         </div>
 
